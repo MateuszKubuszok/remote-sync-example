@@ -1,0 +1,3 @@
+package musicsync
+
+object Common
