@@ -12,31 +12,31 @@ class CodecsSpec extends Specification {
 
   "Album codecs" should {
     "deserialize example" in {
-      decode[Album](readJson("album.json")) must beRight
+      decode[DeezerAlbum](readJson("album.json")) must beRight
     }
   }
 
   "Albums codecs" should {
     "deserialize example" in {
-      decode[Albums](readJson("albums.json")) must beRight
+      decode[DeezerAlbums](readJson("albums.json")) must beRight
     }
   }
 
   "Artists codecs" should {
     "deserialize example" in {
-      decode[Artists](readJson("artists.json")) must beRight
+      decode[DeezerArtists](readJson("artists.json")) must beRight
     }
   }
 
   "Track codecs" should {
     "deserialize example" in {
-      decode[Track](readJson("track.json")) must beRight
+      decode[DeezerTrack](readJson("track.json")) must beRight
     }
   }
 
   "Tracks codecs" should {
     "deserialize example" in {
-      decode[Tracks](readJson("tracks.json")) must beRight
+      decode[DeezerTracks](readJson("tracks.json")) must beRight
     }
   }
 }

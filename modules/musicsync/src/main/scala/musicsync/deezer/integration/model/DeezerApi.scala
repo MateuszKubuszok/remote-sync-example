@@ -14,27 +14,27 @@ trait DeezerApi
 
   object user {
 
-    val albums: Endpoint[(AccessToken, Option[Int]), Albums] = endpoint(
+    val albums: Endpoint[(AccessToken, Option[Int]), DeezerAlbums] = endpoint(
       get(path / "user" / "me" / "albums" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("index"))),
-      response(OK, jsonResponse[Albums])
+      response(OK, jsonResponse[DeezerAlbums])
     )
     val albumsDebug: Endpoint[(AccessToken, Option[Int]), Json] = endpoint(
       get(path / "user" / "me" / "albums" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("index"))),
       response(OK, jsonResponse[Json])
     )
 
-    val artists: Endpoint[(AccessToken, Option[Int]), Artists] = endpoint(
+    val artists: Endpoint[(AccessToken, Option[Int]), DeezerArtists] = endpoint(
       get(path / "user" / "me" / "artists" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("index"))),
-      response(OK, jsonResponse[Artists])
+      response(OK, jsonResponse[DeezerArtists])
     )
     val artistsDebug: Endpoint[(AccessToken, Option[Int]), Json] = endpoint(
       get(path / "user" / "me" / "artists" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("index"))),
       response(OK, jsonResponse[Json])
     )
 
-    val tracks: Endpoint[(AccessToken, Option[Int]), Tracks] = endpoint(
+    val tracks: Endpoint[(AccessToken, Option[Int]), DeezerTracks] = endpoint(
       get(path / "user" / "me" / "tracks" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("index"))),
-      response(OK, jsonResponse[Tracks])
+      response(OK, jsonResponse[DeezerTracks])
     )
     val tracksDebug: Endpoint[(AccessToken, Option[Int]), Json] = endpoint(
       get(path / "user" / "me" / "tracks" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("index"))),

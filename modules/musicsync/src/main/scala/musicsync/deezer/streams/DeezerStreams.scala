@@ -34,12 +34,12 @@ class DeezerStreams(client: DeezerClient) {
       }
       .flatMap(seq => Stream(seq: _*))
 
-  def usersAlbums(accessToken: AccessToken): Stream[Task, Album] =
-    fetchAll[Albums, Album](offset => client.user.albums(accessToken -> offset), _.data.toSeq, _.next)
+  def usersAlbums(accessToken: AccessToken): Stream[Task, DeezerAlbum] =
+    fetchAll[DeezerAlbums, DeezerAlbum](offset => client.user.albums(accessToken -> offset), _.data.toSeq, _.next)
 
-  def usersArtists(accessToken: AccessToken): Stream[Task, Artist] =
-    fetchAll[Artists, Artist](offset => client.user.artists(accessToken -> offset), _.data.toSeq, _.next)
+  def usersArtists(accessToken: AccessToken): Stream[Task, DeezerArtist] =
+    fetchAll[DeezerArtists, DeezerArtist](offset => client.user.artists(accessToken -> offset), _.data.toSeq, _.next)
 
-  def usersTracks(accessToken: AccessToken): Stream[Task, Track] =
-    fetchAll[Tracks, Track](offset => client.user.tracks(accessToken -> offset), _.data.toSeq, _.next)
+  def usersTracks(accessToken: AccessToken): Stream[Task, DeezerTrack] =
+    fetchAll[DeezerTracks, DeezerTrack](offset => client.user.tracks(accessToken -> offset), _.data.toSeq, _.next)
 }

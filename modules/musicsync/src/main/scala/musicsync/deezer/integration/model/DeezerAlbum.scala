@@ -6,9 +6,9 @@ import java.time.LocalDate
 import cats.implicits._
 import io.circe.generic.extras.ConfiguredJsonCodec
 import io.circe.{ Decoder, Encoder }
-import musicsync.domain.{ model => dm }
+import musicsync.domain.model._
 
-sealed trait Album {
+sealed trait DeezerAlbum {
   val id:             Int
   val title:          String
   val link:           URI
@@ -23,18 +23,18 @@ sealed trait Album {
   val available:      Boolean
   val tracklist:      URI
   val explicitLyrics: Boolean
-  val artist:         Artist
+  val artist:         DeezerArtist
 
-  def toDomain(albumID: dm.ID[dm.Album], artistID: dm.ID[dm.Artist]): Either[String, dm.Album] =
+  def toDomain(albumID: ID[Album], artistID: ID[Artist]): Either[String, Album] =
     (Right(albumID),
-     dm.DeezerID.parse[dm.Album](id).map(Option(_)),
+     DeezerID.parse[Album](id).map(Option(_)),
      Right(artistID),
-     dm.Title.parse[dm.Album](title),
-     dm.ReleaseDate.parse(releaseDate)).mapN(dm.Album.apply)
+     Title.parse[Album](title),
+     ReleaseDate.parse(releaseDate)).mapN(Album.apply)
 }
 
 @ConfiguredJsonCodec
-final case class SummaryAlbum(
+final case class SummaryDeezerAlbum(
   id:             Int,
   title:          String,
   link:           URI,
@@ -49,11 +49,11 @@ final case class SummaryAlbum(
   available:      Boolean,
   tracklist:      URI,
   explicitLyrics: Boolean,
-  artist:         Artist
-) extends Album
+  artist:         DeezerArtist
+) extends DeezerAlbum
 
 @ConfiguredJsonCodec
-final case class FullAlbum(
+final case class FullDeezerAlbum(
   id:                    Int,
   title:                 String,
   upc:                   String,
@@ -76,16 +76,16 @@ final case class FullAlbum(
   explicitLyrics:        Boolean,
   explicitContentLyrics: ExplicitContentLevel,
   explicitContentCover:  ExplicitContentLevel,
-  contributors:          List[SummaryArtist],
-  artist:                Artist,
-  tracks:                Tracks
-) extends Album
+  contributors:          List[SummaryDeezerArtist],
+  artist:                DeezerArtist,
+  tracks:                DeezerTracks
+) extends DeezerAlbum
 
-object Album {
+object DeezerAlbum {
 
-  implicit val decoder: Decoder[Album] = Decoder[FullAlbum].widen or Decoder[SummaryAlbum].widen
-  implicit val encoder: Encoder[Album] = {
-    case track: SummaryAlbum => Encoder[SummaryAlbum].apply(track)
-    case track: FullAlbum    => Encoder[FullAlbum].apply(track)
+  implicit val decoder: Decoder[DeezerAlbum] = Decoder[FullDeezerAlbum].widen or Decoder[SummaryDeezerAlbum].widen
+  implicit val encoder: Encoder[DeezerAlbum] = {
+    case track: SummaryDeezerAlbum => Encoder[SummaryDeezerAlbum].apply(track)
+    case track: FullDeezerAlbum    => Encoder[FullDeezerAlbum].apply(track)
   }
 }

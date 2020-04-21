@@ -5,9 +5,9 @@ import java.net.URI
 import cats.implicits._
 import io.circe.generic.extras.ConfiguredJsonCodec
 import io.circe.{ Decoder, Encoder }
-import musicsync.domain.{ model => dm }
+import musicsync.domain.model._
 
-sealed trait Artist {
+sealed trait DeezerArtist {
   val id:           Int
   val name:         String
   val picture:      URI
@@ -16,12 +16,12 @@ sealed trait Artist {
   val pictureXL:    URI
   val tracklist:    URI
 
-  def toDomain(artistID: dm.ID[dm.Artist]): Either[String, dm.Artist] =
-    (Right(artistID), dm.DeezerID.parse[dm.Artist](id).map(Option(_)), dm.Name.parse(name)).mapN(dm.Artist.apply)
+  def toDomain(artistID: ID[Artist]): Either[String, Artist] =
+    (Right(artistID), DeezerID.parse[Artist](id).map(Option(_)), Name.parse(name)).mapN(Artist.apply)
 }
 
 @ConfiguredJsonCodec
-final case class SummaryArtist(
+final case class SummaryDeezerArtist(
   id:           Int,
   name:         String,
   picture:      URI,
@@ -29,10 +29,10 @@ final case class SummaryArtist(
   pictureBig:   URI,
   pictureXL:    URI,
   tracklist:    URI
-) extends Artist
+) extends DeezerArtist
 
 @ConfiguredJsonCodec
-final case class FullArtist(
+final case class FullDeezerArtist(
   id:           Int,
   name:         String,
   link:         URI,
@@ -45,13 +45,13 @@ final case class FullArtist(
   nbFan:        Int,
   radio:        Boolean,
   tracklist:    URI
-) extends Artist
+) extends DeezerArtist
 
-object Artist {
+object DeezerArtist {
 
-  implicit val decoder: Decoder[Artist] = Decoder[FullArtist].widen or Decoder[SummaryArtist].widen
-  implicit val encoder: Encoder[Artist] = {
-    case track: SummaryArtist => Encoder[SummaryArtist].apply(track)
-    case track: FullArtist    => Encoder[FullArtist].apply(track)
+  implicit val decoder: Decoder[DeezerArtist] = Decoder[FullDeezerArtist].widen or Decoder[SummaryDeezerArtist].widen
+  implicit val encoder: Encoder[DeezerArtist] = {
+    case track: SummaryDeezerArtist => Encoder[SummaryDeezerArtist].apply(track)
+    case track: FullDeezerArtist    => Encoder[FullDeezerArtist].apply(track)
   }
 }
