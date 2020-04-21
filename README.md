@@ -22,6 +22,6 @@
   copy the part after `code`
 * query:
   ```
-  https://connect.deezer.com/oauth/access_token.php?app_id=[YOUR_APP_ID]]&secret=[YOUR_APP_SECRET]]&code=[CODE_FROM_ABOVE]]
+  https://connect.deezer.com/oauth/access_token.php?app_id=[YOUR_APP_ID]&secret=[YOUR_APP_SECRET]&code=[CODE_FROM_ABOVE]
   ```
 * set `DEEZER_ACCESS_TOKEN` environment variable to value obtained from this call
