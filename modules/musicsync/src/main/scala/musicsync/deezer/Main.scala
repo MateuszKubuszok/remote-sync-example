@@ -6,6 +6,7 @@ import com.typesafe.scalalogging.Logger
 import monix.eval.{ Task, TaskApp }
 import musicsync.deezer.integration.client.DeezerClient
 import musicsync.deezer.integration.model.AccessToken
+import musicsync.deezer.streams.DeezerStreams
 import pureconfig._
 import pureconfig.generic.auto._
 
@@ -18,12 +19,11 @@ object Main extends TaskApp {
   override def run(args: List[String]): Task[ExitCode] =
     for {
       Config(accessToken) <- Task(ConfigSource.default.loadOrThrow[Config])
-      client = new DeezerClient(OkHttpMonixBackend())
-      albums <- client.user.albums(accessToken -> None)
-      _ <- Task(logger.info(s"Album:\n$albums"))
-      artists <- client.user.artists(accessToken -> None)
-      _ <- Task(logger.info(s"Artists:\n$artists"))
-      tracks <- client.user.tracks(accessToken -> None)
-      _ <- Task(logger.info(s"Tracks:\n$tracks"))
+      client  = new DeezerClient(OkHttpMonixBackend())
+      streams = new DeezerStreams(client)
+      _ <- streams.usersAlbums(accessToken).evalTap(album => Task(logger.info(s"Album:\n$album\n"))).compile.drain
+      _ <- streams.usersArtists(accessToken).evalTap(album => Task(logger.info(s"Artist:\n$album\n"))).compile.drain
+      _ <- streams.usersTracks(accessToken).evalTap(album => Task(logger.info(s"Track:\n$album\n"))).compile.drain
+      _ <- Task(logger.info(s"Done running streams"))
     } yield ExitCode.Success
 }

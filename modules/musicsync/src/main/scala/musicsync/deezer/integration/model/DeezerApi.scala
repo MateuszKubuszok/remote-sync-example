@@ -15,29 +15,29 @@ trait DeezerApi
   object user {
 
     val albums: Endpoint[(AccessToken, Option[Int]), Albums] = endpoint(
-      get(path / "user" / "me" / "albums" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("offset"))),
+      get(path / "user" / "me" / "albums" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("index"))),
       response(OK, jsonResponse[Albums])
     )
     val albumsDebug: Endpoint[(AccessToken, Option[Int]), Json] = endpoint(
-      get(path / "user" / "me" / "albums" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("offset"))),
+      get(path / "user" / "me" / "albums" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("index"))),
       response(OK, jsonResponse[Json])
     )
 
     val artists: Endpoint[(AccessToken, Option[Int]), Artists] = endpoint(
-      get(path / "user" / "me" / "artists" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("offset"))),
+      get(path / "user" / "me" / "artists" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("index"))),
       response(OK, jsonResponse[Artists])
     )
     val artistsDebug: Endpoint[(AccessToken, Option[Int]), Json] = endpoint(
-      get(path / "user" / "me" / "artists" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("offset"))),
+      get(path / "user" / "me" / "artists" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("index"))),
       response(OK, jsonResponse[Json])
     )
 
     val tracks: Endpoint[(AccessToken, Option[Int]), Tracks] = endpoint(
-      get(path / "user" / "me" / "tracks" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("offset"))),
+      get(path / "user" / "me" / "tracks" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("index"))),
       response(OK, jsonResponse[Tracks])
     )
     val tracksDebug: Endpoint[(AccessToken, Option[Int]), Json] = endpoint(
-      get(path / "user" / "me" / "tracks" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("offset"))),
+      get(path / "user" / "me" / "tracks" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("index"))),
       response(OK, jsonResponse[Json])
     )
   }
