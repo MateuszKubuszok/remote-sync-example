@@ -11,3 +11,9 @@ final case class UserDTO(
   def toDomain: Either[String, User] =
     ID.parse[User](id).map(User)
 }
+object UserDTO {
+
+  def fromModel(user: User): UserDTO = UserDTO(
+    id = user.id.value
+  )
+}

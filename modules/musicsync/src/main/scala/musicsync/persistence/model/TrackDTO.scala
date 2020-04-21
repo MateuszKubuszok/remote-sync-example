@@ -20,3 +20,13 @@ final case class TrackDTO(
      Title.parse[Track](title),
      Duration.parse(duration)).mapN(Track.apply)
 }
+object TrackDTO {
+
+  def fromDomain(track: Track): TrackDTO = TrackDTO(
+    id       = track.id.value,
+    deezerID = track.deezerID.map(_.value),
+    artistID = track.artistID.value,
+    title    = track.title.value.value,
+    duration = track.duration.value.value
+  )
+}

@@ -21,3 +21,13 @@ final case class AlbumDTO(
      Title.parse[Album](title),
      ReleaseDate.parse(releaseDate)).mapN(Album.apply)
 }
+object AlbumDTO {
+
+  def fromDomain(album: Album): AlbumDTO = AlbumDTO(
+    id          = album.id.value,
+    deezerID    = album.deezerID.map(_.value),
+    artistID    = album.artistID.value,
+    title       = album.title.value.value,
+    releaseDate = album.releaseDate.value
+  )
+}
