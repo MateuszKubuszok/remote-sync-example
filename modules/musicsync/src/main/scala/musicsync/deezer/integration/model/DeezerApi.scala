@@ -1,6 +1,7 @@
 package musicsync.deezer.integration.model
 
 import endpoints._
+import io.circe.Json
 
 trait DeezerApi
     extends algebra.Endpoints
@@ -13,19 +14,31 @@ trait DeezerApi
 
   object user {
 
-    val albums: Endpoint[AccessToken, List[Album]] = endpoint[AccessToken, List[Album]](
-      get(path / "user" / "albums" /? qs[AccessToken]("access_token")),
-      response(OK, jsonResponse[List[Album]])
+    val albums: Endpoint[(AccessToken, Option[Int]), Albums] = endpoint(
+      get(path / "user" / "me" / "albums" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("offset"))),
+      response(OK, jsonResponse[Albums])
+    )
+    val albumsDebug: Endpoint[(AccessToken, Option[Int]), Json] = endpoint(
+      get(path / "user" / "me" / "albums" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("offset"))),
+      response(OK, jsonResponse[Json])
     )
 
-    val artists: Endpoint[AccessToken, List[Artist]] = endpoint[AccessToken, List[Artist]](
-      get(path / "user" / "artists" /? qs[AccessToken]("access_token")),
-      response(OK, jsonResponse[List[Artist]])
+    val artists: Endpoint[(AccessToken, Option[Int]), Artists] = endpoint(
+      get(path / "user" / "me" / "artists" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("offset"))),
+      response(OK, jsonResponse[Artists])
+    )
+    val artistsDebug: Endpoint[(AccessToken, Option[Int]), Json] = endpoint(
+      get(path / "user" / "me" / "artists" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("offset"))),
+      response(OK, jsonResponse[Json])
     )
 
-    val tracks: Endpoint[AccessToken, List[FullTrack]] = endpoint[AccessToken, List[FullTrack]](
-      get(path / "user" / "tracks" /? qs[AccessToken]("access_token")),
-      response(OK, jsonResponse[List[FullTrack]])
+    val tracks: Endpoint[(AccessToken, Option[Int]), Tracks] = endpoint(
+      get(path / "user" / "me" / "tracks" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("offset"))),
+      response(OK, jsonResponse[Tracks])
+    )
+    val tracksDebug: Endpoint[(AccessToken, Option[Int]), Json] = endpoint(
+      get(path / "user" / "me" / "tracks" /? (qs[AccessToken]("access_token") & qs[Option[Int]]("offset"))),
+      response(OK, jsonResponse[Json])
     )
   }
 }

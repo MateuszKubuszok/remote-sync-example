@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter
 import io.circe.{ Decoder, Encoder }
 import io.circe.generic.extras.Configuration
 import io.estatico.newtype.macros.newtype
+import io.estatico.newtype.ops._
+import pureconfig.ConfigReader
 
 import scala.util.Try
 
@@ -26,4 +28,7 @@ package object model {
   private[model] implicit val uriEncoder: Encoder[URI] = Encoder.encodeString.contramap[URI](_.toString)
 
   @newtype case class AccessToken(value: String)
+  object AccessToken {
+    implicit val configReader: ConfigReader[AccessToken] = ConfigReader[String].coerce
+  }
 }

@@ -150,7 +150,10 @@ object Settings extends Dependencies {
       Wart.PublicInference,
       Wart.NonUnitStatements,
       Wart.Nothing
-    )
+    ),
+
+    addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1"),
+    addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full)
   )
 
   implicit final class RunConfigurator(project: Project) {

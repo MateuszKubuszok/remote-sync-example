@@ -11,13 +11,10 @@ sealed trait Track {
   val id:             Int
   val readable:       Boolean
   val title:          String
-  val titleShort:     String
-  val titleVersion:   String
   val link:           URI
   val duration:       Int
   val rank:           Int
   val explicitLyrics: Boolean
-  val preview:        URI
 }
 
 @ConfiguredJsonCodec
@@ -25,13 +22,10 @@ final case class SummaryTrack(
   id:             Int,
   readable:       Boolean,
   title:          String,
-  titleShort:     String,
-  titleVersion:   String,
   link:           URI,
   duration:       Int,
   rank:           Int,
-  explicitLyrics: Boolean,
-  preview:        URI
+  explicitLyrics: Boolean
 ) extends Track
 
 @ConfiguredJsonCodec

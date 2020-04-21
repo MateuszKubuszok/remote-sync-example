@@ -5,8 +5,8 @@ import java.net.URI
 import io.circe.generic.extras.ConfiguredJsonCodec
 
 @ConfiguredJsonCodec
-final case class Tracks(
-  data:     List[Track],
+final case class Albums(
+  data:     List[Album],
   checksum: Option[String],
   total:    Option[Int],
   next:     Option[URI]

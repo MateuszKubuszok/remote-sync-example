@@ -11,23 +11,32 @@ class CodecsSpec extends Specification {
     new String(Files.readAllBytes(Paths.get(getClass.getClassLoader.getResource(name).getPath)))
 
   "Album codecs" should {
-
     "deserialize example" in {
       decode[Album](readJson("album.json")) must beRight
     }
   }
 
-  "Artist codecs" should {
-
+  "Albums codecs" should {
     "deserialize example" in {
-      decode[FullArtist](readJson("artist.json")) must beRight
+      decode[Albums](readJson("albums.json")) must beRight
+    }
+  }
+
+  "Artists codecs" should {
+    "deserialize example" in {
+      decode[Artists](readJson("artists.json")) must beRight
     }
   }
 
   "Track codecs" should {
-
     "deserialize example" in {
       decode[Track](readJson("track.json")) must beRight
+    }
+  }
+
+  "Tracks codecs" should {
+    "deserialize example" in {
+      decode[Tracks](readJson("tracks.json")) must beRight
     }
   }
 }
