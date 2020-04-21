@@ -46,12 +46,14 @@ object Dependencies {
   val refinedDecline    = "com.monovore" %% "decline-refined" % declinedVersion
   val refinedPureConfig = "eu.timepit" %% "refined-pureconfig" % refinedVersion
   // endpoints
-  val circe          = "io.circe" %% "circe-core" % circeVersion
-  val circeGeneric   = "io.circe" %% "circe-generic" % circeVersion
+  val circe           = "io.circe" %% "circe-core" % circeVersion
+  val circeGeneric    = "io.circe" %% "circe-generic" % circeVersion
   val circeExtras     = "io.circe" %% "circe-generic-extras" % circeVersion
-  val circeParser    = "io.circe" %% "circe-parser" % circeVersion
-  val endpoints      = "org.julienrf" %% "endpoints-algebra" % endpointsVersion
-  val endpointsCirce = "org.julienrf" %% "endpoints-json-schema-circe" % endpointsVersion
+  val circeParser     = "io.circe" %% "circe-parser" % circeVersion
+  val endpoints       = "org.julienrf" %% "endpoints-algebra" % endpointsVersion
+  val endpointsCirce  = "org.julienrf" %% "endpoints-json-schema-circe" % endpointsVersion
+  val endpointsSTTP   = "org.julienrf" %% "endpoints-sttp-client" % endpointsVersion
+  val monixSTTP       = "com.softwaremill.sttp" %% "okhttp-backend-monix" % "1.7.2"
   // async
   val monixExecution = "io.monix" %% "monix-execution" % monixVersion
   val monixEval      = "io.monix" %% "monix-eval" % monixVersion
@@ -97,6 +99,8 @@ trait Dependencies {
     circeParser,
     endpoints,
     endpointsCirce,
+    endpointsSTTP,
+    monixSTTP,
     decline,
     scalaConfig,
     pureConfig,

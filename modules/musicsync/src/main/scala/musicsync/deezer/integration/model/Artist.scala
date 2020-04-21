@@ -1,4 +1,4 @@
-package musicsync.deezer.external
+package musicsync.deezer.integration.model
 
 import java.net.URI
 

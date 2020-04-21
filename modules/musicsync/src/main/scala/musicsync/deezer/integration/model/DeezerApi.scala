@@ -1,12 +1,13 @@
-package musicsync.deezer.external
+package musicsync.deezer.integration.model
 
 import endpoints._
 
-trait Api
+trait DeezerApi
     extends algebra.Endpoints
-    with algebra.StatusCodes
     with algebra.JsonEntitiesFromCodecs
     with algebra.circe.JsonEntitiesFromCodecs {
+
+  // path here should be https://api.deezer.com/
 
   protected implicit val accessTokenQueryString: QueryStringParam[AccessToken]
 

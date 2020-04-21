@@ -1,4 +1,4 @@
-package musicsync.deezer.external
+package musicsync.deezer.integration.model
 
 import cats.implicits._
 import enumeratum._
