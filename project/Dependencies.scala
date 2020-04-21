@@ -11,8 +11,10 @@ object Dependencies {
 
   // libraries versions
   val catsVersion       = "2.0.0"
+  val circeVersion = "0.13.0"
   val declinedVersion   = "1.0.0"
   val drosteVersion     = "0.8.0"
+  val endpointsVersion  = "0.15.0"
   val enumeratumVersion = "1.5.15"
   val fs2Version        = "2.2.1"
   val libGDXVersion     = "1.9.10"
@@ -32,6 +34,7 @@ object Dependencies {
   val catsLaws          = "org.typelevel" %% "cats-laws" % catsVersion
   val droste            = "io.higherkindness" %% "droste-core" % drosteVersion
   val enumeratum        = "com.beachape" %% "enumeratum" % enumeratumVersion
+  val enumeratumCirce   = "com.beachape" %% "enumeratum-circe" % "1.5.23"
   val fs2               = "co.fs2" %% "fs2-core" % fs2Version
   val fs2IO             = "co.fs2" %% "fs2-io" % fs2Version
   val magnolia          = "com.propensive" %% "magnolia" % "0.15.0"
@@ -42,6 +45,12 @@ object Dependencies {
   val refinedCats       = "eu.timepit" %% "refined-cats" % refinedVersion
   val refinedDecline    = "com.monovore" %% "decline-refined" % declinedVersion
   val refinedPureConfig = "eu.timepit" %% "refined-pureconfig" % refinedVersion
+  // endpoints
+  val circe = "io.circe" %% "circe-core" % circeVersion
+  val circeGeneric = "io.circe" %% "circe-generic" % circeVersion
+  val circeParser = "io.circe" %% "circe-parser" % circeVersion
+  val endpoints = "org.julienrf" %% "endpoints-algebra" % endpointsVersion
+  val endpointsCirce = "org.julienrf" %% "endpoints-json-schema-circe" % endpointsVersion
   // async
   val monixExecution = "io.monix" %% "monix-execution" % monixVersion
   val monixEval      = "io.monix" %% "monix-eval" % monixVersion
@@ -60,8 +69,8 @@ object Dependencies {
 
 trait Dependencies {
 
-  val scalaOrganizationUsed = scalaOrganization
-  val scalaVersionUsed = scalaVersion
+  val scalaOrganizationUsed  = scalaOrganization
+  val scalaVersionUsed       = scalaVersion
   val crossScalaVersionsUsed = crossScalaVersions
 
   // resolvers
@@ -70,6 +79,7 @@ trait Dependencies {
   val mainDeps = Seq(
     cats,
     enumeratum,
+    enumeratumCirce,
     fs2,
     fs2IO,
     magnolia,
@@ -80,6 +90,11 @@ trait Dependencies {
     refinedCats,
     refinedDecline,
     refinedPureConfig,
+    circe,
+    circeGeneric,
+    circeParser,
+    endpoints,
+    endpointsCirce,
     decline,
     scalaConfig,
     pureConfig,

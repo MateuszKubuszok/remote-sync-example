@@ -44,7 +44,7 @@
    <parameter name="illegalImports"><![CDATA[sun._,java.awt._]]></parameter>
   </parameters>
  </check>
- <check level="error" class="org.scalastyle.scalariform.MagicNumberChecker" enabled="true">
+ <check level="error" class="org.scalastyle.scalariform.MagicNumberChecker" enabled="false">
   <parameters>
    <parameter name="ignore"><![CDATA[-1,0,1,2,3]]></parameter>
   </parameters>
@@ -74,12 +74,12 @@
    <parameter name="maxTypes"><![CDATA[30]]></parameter>
   </parameters>
  </check>
- <check level="error" class="org.scalastyle.scalariform.ObjectNamesChecker" enabled="true">
+ <check level="error" class="org.scalastyle.scalariform.ObjectNamesChecker" enabled="false">
   <parameters>
    <parameter name="regex"><![CDATA[[A-Z][A-Za-z]*]]></parameter>
   </parameters>
  </check>
- <check level="error" class="org.scalastyle.scalariform.PackageObjectNamesChecker" enabled="true">
+ <check level="error" class="org.scalastyle.scalariform.PackageObjectNamesChecker" enabled="false">
   <parameters>
     <parameter name="regex"><![CDATA[^[a-z][A-Za-z]*$]]></parameter>
   </parameters>

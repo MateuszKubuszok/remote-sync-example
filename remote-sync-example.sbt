@@ -5,11 +5,11 @@ lazy val root = project.root
   .setName("remote-sync-example")
   .setDescription("Deezer to Database sync")
   .configureRoot
-  .aggregate(common, first, second)
+  .aggregate(musicsync)
 
-lazy val common = project.from("common")
-  .setName("common")
-  .setDescription("Common utilities")
+lazy val musicsync = project.from("musicsync")
+  .setName("musicsync")
+  .setDescription("Synchronize Deezer for user's data with a database")
   .setInitialImport()
   .configureModule
   .configureTests()
@@ -18,21 +18,5 @@ lazy val common = project.from("common")
     IO.write(file, s"version=${version.value}")
     Seq(file)
   })
-
-lazy val first = project.from("first")
-  .setName("first")
-  .setDescription("First project")
-  .setInitialImport("musicsync.first._")
-  .configureModule
-  .configureTests()
-  .compileAndTestDependsOn(common)
-
-lazy val second = project.from("second")
-  .setName("second")
-  .setDescription("Second project")
-  .setInitialImport("musicsync.second._")
-  .configureModule
-  .configureTests()
-  .compileAndTestDependsOn(common)
 
 addCommandAlias("fullTest", ";test;scalastyle")

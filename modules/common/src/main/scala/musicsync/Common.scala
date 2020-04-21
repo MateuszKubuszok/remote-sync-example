@@ -1,3 +1,0 @@
-package musicsync
-
-object Common
