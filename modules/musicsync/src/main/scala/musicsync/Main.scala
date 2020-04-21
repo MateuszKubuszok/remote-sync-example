@@ -1,4 +1,4 @@
-package musicsync.deezer
+package musicsync
 
 import cats.effect.ExitCode
 import com.softwaremill.sttp.okhttp.monix.OkHttpMonixBackend

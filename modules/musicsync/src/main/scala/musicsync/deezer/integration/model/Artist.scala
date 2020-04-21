@@ -2,9 +2,10 @@ package musicsync.deezer.integration.model
 
 import java.net.URI
 
-import cats.syntax.functor._
+import cats.implicits._
 import io.circe.generic.extras.ConfiguredJsonCodec
 import io.circe.{ Decoder, Encoder }
+import musicsync.domain.{ model => dm }
 
 sealed trait Artist {
   val id:           Int
@@ -14,6 +15,9 @@ sealed trait Artist {
   val pictureBig:   URI
   val pictureXL:    URI
   val tracklist:    URI
+
+  def toDomain(artistID: dm.ID[dm.Artist]): Either[String, dm.Artist] =
+    (Right(artistID), dm.DeezerID.parse[dm.Artist](id).map(Option(_)), dm.Name.parse(name)).mapN(dm.Artist.apply)
 }
 
 @ConfiguredJsonCodec
