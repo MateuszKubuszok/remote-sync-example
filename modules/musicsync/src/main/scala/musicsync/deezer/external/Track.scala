@@ -1,11 +1,11 @@
 package musicsync.deezer.external
 
 import java.net.URI
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 import cats.syntax.functor._
-import io.circe.generic.JsonCodec
 import io.circe.{ Decoder, Encoder }
+import io.circe.generic.extras.ConfiguredJsonCodec
 
 sealed trait Track {
   val id:             Int
@@ -18,10 +18,9 @@ sealed trait Track {
   val rank:           Int
   val explicitLyrics: Boolean
   val preview:        URI
-  val album:          Album
 }
 
-@JsonCodec
+@ConfiguredJsonCodec
 final case class SummaryTrack(
   id:             Int,
   readable:       Boolean,
@@ -32,11 +31,10 @@ final case class SummaryTrack(
   duration:       Int,
   rank:           Int,
   explicitLyrics: Boolean,
-  preview:        URI,
-  album:          Album
+  preview:        URI
 ) extends Track
 
-@JsonCodec
+@ConfiguredJsonCodec
 final case class FullTrack(
   id:                    Int,
   readable:              Boolean,
@@ -51,7 +49,7 @@ final case class FullTrack(
   trackPosition:         Int,
   diskNumber:            Int,
   rank:                  Int,
-  releaseDate:           LocalDateTime,
+  releaseDate:           LocalDate,
   explicitLyrics:        Boolean,
   explicitContentLyrics: ExplicitContentLevel,
   explicitContentCover:  ExplicitContentLevel,

@@ -1,11 +1,11 @@
 package musicsync.deezer.external
 
 import java.net.URI
-import java.time.LocalDateTime
+import java.time.LocalDate
 
-import io.circe.generic.JsonCodec
+import io.circe.generic.extras.ConfiguredJsonCodec
 
-@JsonCodec
+@ConfiguredJsonCodec
 final case class Album(
   id:                    Int,
   title:                 String,
@@ -18,18 +18,18 @@ final case class Album(
   coverBig:              URI,
   coverXL:               URI,
   genreID:               Int,
-  genres:                List[Genre],
+  genres:                Genres,
   label:                 String,
   nbTracks:              Int,
   duration:              Int,
-  releaseDate:           LocalDateTime,
+  releaseDate:           LocalDate,
   recordType:            String, // TODO: consider enum
   available:             Boolean,
   tracklist:             URI,
   explicitLyrics:        Boolean,
   explicitContentLyrics: ExplicitContentLevel,
   explicitContentCover:  ExplicitContentLevel,
-  contributors:          List[Artist],
+  contributors:          List[SummaryArtist],
   artist:                Artist,
-  tracks:                List[SummaryTrack]
+  tracks:                Tracks
 )

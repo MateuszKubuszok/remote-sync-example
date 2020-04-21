@@ -11,7 +11,7 @@ object Dependencies {
 
   // libraries versions
   val catsVersion       = "2.0.0"
-  val circeVersion = "0.13.0"
+  val circeVersion      = "0.13.0"
   val declinedVersion   = "1.0.0"
   val drosteVersion     = "0.8.0"
   val endpointsVersion  = "0.15.0"
@@ -46,10 +46,11 @@ object Dependencies {
   val refinedDecline    = "com.monovore" %% "decline-refined" % declinedVersion
   val refinedPureConfig = "eu.timepit" %% "refined-pureconfig" % refinedVersion
   // endpoints
-  val circe = "io.circe" %% "circe-core" % circeVersion
-  val circeGeneric = "io.circe" %% "circe-generic" % circeVersion
-  val circeParser = "io.circe" %% "circe-parser" % circeVersion
-  val endpoints = "org.julienrf" %% "endpoints-algebra" % endpointsVersion
+  val circe          = "io.circe" %% "circe-core" % circeVersion
+  val circeGeneric   = "io.circe" %% "circe-generic" % circeVersion
+  val circeExtras     = "io.circe" %% "circe-generic-extras" % circeVersion
+  val circeParser    = "io.circe" %% "circe-parser" % circeVersion
+  val endpoints      = "org.julienrf" %% "endpoints-algebra" % endpointsVersion
   val endpointsCirce = "org.julienrf" %% "endpoints-json-schema-circe" % endpointsVersion
   // async
   val monixExecution = "io.monix" %% "monix-execution" % monixVersion
@@ -92,6 +93,7 @@ trait Dependencies {
     refinedPureConfig,
     circe,
     circeGeneric,
+    circeExtras,
     circeParser,
     endpoints,
     endpointsCirce,
