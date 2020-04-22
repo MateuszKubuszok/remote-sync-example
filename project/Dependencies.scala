@@ -13,6 +13,7 @@ object Dependencies {
   val catsVersion       = "2.0.0"
   val circeVersion      = "0.13.0"
   val declinedVersion   = "1.0.0"
+  val doobieVersion = "0.9.0"
   val drosteVersion     = "0.8.0"
   val endpointsVersion  = "0.15.0"
   val enumeratumVersion = "1.5.15"
@@ -58,6 +59,10 @@ object Dependencies {
   val monixExecution = "io.monix" %% "monix-execution" % monixVersion
   val monixEval      = "io.monix" %% "monix-eval" % monixVersion
   val monixBio       = "io.monix" %% "monix-bio" % "0.1.0"
+  // database
+  val doobie = "org.tpolecat" %% "doobie-core"      % doobieVersion
+  val doobiePostgres = "org.tpolecat" %% "doobie-postgres"      % doobieVersion
+  val flyway = "org.flywaydb" % "flyway-core" % "6.4.0"
   // config
   val decline     = "com.monovore" %% "decline" % declinedVersion
   val scalaConfig = "com.typesafe" % "config" % "1.4.0"
@@ -106,6 +111,9 @@ trait Dependencies {
     pureConfig,
     monixExecution,
     monixEval,
+    doobie,
+    doobiePostgres,
+    flyway,
     scalaLogging,
     logback
   )
