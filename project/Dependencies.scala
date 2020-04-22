@@ -7,7 +7,7 @@ object Dependencies {
   // scala version
   val scalaOrganization  = "org.scala-lang"
   val scalaVersion       = "2.13.1"
-  val crossScalaVersions = Seq("2.11.12", "2.12.10", "2.13.1")
+  val crossScalaVersions = Seq("2.13.1")
 
   // libraries versions
   val catsVersion       = "2.0.0"
