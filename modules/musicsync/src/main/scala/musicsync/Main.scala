@@ -6,7 +6,7 @@ import com.typesafe.scalalogging.Logger
 import monix.eval.{ Task, TaskApp }
 import musicsync.deezer.integration.client.DeezerClient
 import musicsync.deezer.integration.model.AccessToken
-import musicsync.deezer.streams.DeezerStreams
+import musicsync.deezer.services.DeezerStreams
 import pureconfig._
 import pureconfig.generic.auto._
 

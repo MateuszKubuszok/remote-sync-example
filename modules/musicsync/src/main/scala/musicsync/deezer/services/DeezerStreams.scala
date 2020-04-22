@@ -1,4 +1,4 @@
-package musicsync.deezer.streams
+package musicsync.deezer.services
 
 import java.net.URI
 
@@ -33,6 +33,8 @@ class DeezerStreams(client: DeezerClient) {
         }
       }
       .flatMap(seq => Stream(seq: _*))
+
+  // public for debugging purposes
 
   def usersAlbums(accessToken: AccessToken): Stream[Task, DeezerAlbum] =
     fetchAll[DeezerAlbums, DeezerAlbum](offset => client.user.albums(accessToken -> offset), _.data.toSeq, _.next)
