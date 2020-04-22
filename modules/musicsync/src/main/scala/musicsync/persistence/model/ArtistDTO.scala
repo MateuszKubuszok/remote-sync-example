@@ -11,7 +11,7 @@ final case class ArtistDTO(
   name:     String
 ) {
 
-  def toDomain(artistID: ID[Artist]): Either[String, Artist] =
+  def toDomain: Either[String, Artist] =
     (ID.parse[Artist](id), deezerID.traverse(DeezerID.parse[Artist]), Name.parse(name)).mapN(Artist.apply)
 }
 object ArtistDTO {

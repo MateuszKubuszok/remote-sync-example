@@ -14,9 +14,7 @@ trait TrackDTORepository {
 
   def findByDeezerID(deezerID: Int): Task[Option[TrackDTO]]
 
-  def addToUser(userID: UUID, trackID: UUID): Task[Unit]
-
-  def removeFromUser(userID: UUID, trackID: UUID): Task[Unit]
+  def setForUser(userID: UUID, tracksIDs: Set[UUID]): Task[Unit]
 }
 
 class TrackDTORepositoryInMemory(tracks: Ref[Task, Map[UUID, TrackDTO]], userTracks: Ref[Task, Map[UUID, Set[UUID]]])
@@ -29,17 +27,8 @@ class TrackDTORepositoryInMemory(tracks: Ref[Task, Map[UUID, TrackDTO]], userTra
   override def findByDeezerID(deezerID: Int): Task[Option[TrackDTO]] =
     tracks.get.map(_.values.find(_.deezerID.contains(deezerID)))
 
-  override def addToUser(userID: UUID, trackID: UUID): Task[Unit] =
-    userTracks.update(_.updatedWith(userID) {
-      case Some(ids) => Option(ids + trackID)
-      case None      => Option(Set(trackID))
-    })
-
-  override def removeFromUser(userID: UUID, trackID: UUID): Task[Unit] =
-    userTracks.update(_.updatedWith(userID) {
-      case Some(ids) => Option(ids - trackID)
-      case None      => None
-    })
+  override def setForUser(userID: UUID, tracksIDs: Set[UUID]): Task[Unit] =
+    userTracks.update(_.updated(userID, tracksIDs))
 }
 object TrackDTORepositoryInMemory {
 

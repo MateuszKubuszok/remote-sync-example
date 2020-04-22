@@ -1,6 +1,7 @@
 package musicsync.deezer.integration.model
 
 import java.net.URI
+import java.util.UUID
 
 import cats.implicits._
 import io.circe.generic.extras.ConfiguredJsonCodec
@@ -18,6 +19,8 @@ sealed trait DeezerArtist {
 
   def toDomain(artistID: ID[Artist]): Either[String, Artist] =
     (Right(artistID), DeezerID.parse[Artist](id).map(Option(_)), Name.parse(name)).mapN(Artist.apply)
+  def toDomainNew: Either[String, Artist] =
+    toDomain(ID[Artist](UUID.randomUUID))
 }
 
 @ConfiguredJsonCodec

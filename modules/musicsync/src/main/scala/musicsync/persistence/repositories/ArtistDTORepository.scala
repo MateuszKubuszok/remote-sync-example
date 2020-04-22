@@ -14,9 +14,7 @@ trait ArtistDTORepository {
 
   def findByDeezerID(deezerID: Int): Task[Option[ArtistDTO]]
 
-  def addToUser(userID: UUID, artistID: UUID): Task[Unit]
-
-  def removeFromUser(userID: UUID, artistID: UUID): Task[Unit]
+  def setForUser(userID: UUID, artistsIDs: Set[UUID]): Task[Unit]
 }
 
 class ArtistDTORepositoryInMemory(
@@ -31,17 +29,8 @@ class ArtistDTORepositoryInMemory(
   override def findByDeezerID(deezerID: Int): Task[Option[ArtistDTO]] =
     artists.get.map(_.values.find(_.deezerID.contains(deezerID)))
 
-  override def addToUser(userID: UUID, artistID: UUID): Task[Unit] =
-    userArtists.update(_.updatedWith(userID) {
-      case Some(ids) => Option(ids + artistID)
-      case None      => Option(Set(artistID))
-    })
-
-  override def removeFromUser(userID: UUID, artistID: UUID): Task[Unit] =
-    userArtists.update(_.updatedWith(userID) {
-      case Some(ids) => Option(ids - artistID)
-      case None      => None
-    })
+  override def setForUser(userID: UUID, artistsIDs: Set[UUID]): Task[Unit] =
+    userArtists.update(_.updated(userID, artistsIDs))
 }
 object ArtistDTORepositoryInMemory {
 
